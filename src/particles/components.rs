@@ -2,13 +2,15 @@ use bevy::prelude::*;
 
 #[derive(Component)]
 pub struct Particle {
-    pub velocity: Vec2,
+    pub position: Vec2,
+    pub position_old: Vec2,
 }
 
-impl Default for Particle {
-    fn default() -> Self {
+impl Particle {
+    pub fn from_position(position: Vec2) -> Self {
         Particle {
-            velocity: Vec2::ZERO,
+            position: position,
+            position_old: position,
         }
     }
 }

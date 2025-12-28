@@ -12,7 +12,7 @@ impl Default for SimulationSettings {
         Self {
             size: 32.0,
             zoom: 8.0,
-            gravity: Vec2::new(0.0, 0.0),
+            gravity: Vec2::new(0.0, -9.8),
         }
     }
 }
