@@ -10,7 +10,7 @@
 #### Removido
 - Parâmetro **velocity**
 #### Alterado
-- Construtor impl default de `Particle` foi substituído por `from_position`
+- Construtor impl default de **Particle** foi substituído por **from_position**
 - Lógica do spawn de particulas
 - **apply_physics** agora usa calculo dinâmico de **velocity** baseado em **position** e **position_old**
 
