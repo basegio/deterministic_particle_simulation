@@ -2,14 +2,14 @@ use crate::particles::components::Particle;
 use crate::simulation::resources::SimulationSettings;
 use bevy::prelude::*;
 
-pub fn spawn_particles(mut commands: Commands) {
-    for i in 0..10 {
-        commands.spawn((
-            Particle {
-                velocity: Vec2::new(i as f32 * 10.0, 0.0),
-            },
-            Transform::from_xyz(i as f32 * 20.0 - 100.0, 200.0, 0.0),
-        ));
+pub fn spawn_particles(mut commands: Commands, settings: Res<SimulationSettings>) {
+    for i in 0..32 {
+        // if i % 2 != 0 {
+        //     continue;
+        // }
+
+        let x: f32 = i as f32 - settings.size / 2.0;
+        commands.spawn((Particle::default(), Transform::from_xyz(x, 0.0, 0.0)));
     }
 }
 
@@ -25,8 +25,16 @@ pub fn apply_physics(
     }
 }
 
-pub fn draw_particles(mut gizmos: Gizmos, query: Query<&Transform, With<Particle>>) {
+pub fn draw_particles(
+    mut gizmos: Gizmos,
+    query: Query<&Transform, With<Particle>>,
+    settings: Res<SimulationSettings>,
+) {
     for transform in &query {
-        gizmos.circle_2d(transform.translation.xy(), 10.0, Color::WHITE);
+        gizmos.circle_2d(
+            transform.translation.xy() * settings.zoom + Vec2::new(settings.zoom / 2.0, 0.0),
+            settings.zoom / 2.0,
+            Color::WHITE,
+        );
     }
 }
