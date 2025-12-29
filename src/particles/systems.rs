@@ -1,6 +1,5 @@
 use crate::particles::components::Particle;
 use crate::simulation::resources::{GravityMode, SimulationSettings};
-use bevy::math::VectorSpace;
 use bevy::prelude::*;
 
 pub fn spawn_particles(mut commands: Commands, settings: Res<SimulationSettings>) {
