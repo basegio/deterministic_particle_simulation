@@ -10,10 +10,11 @@ pub struct SimulationSettings {
 impl Default for SimulationSettings {
     fn default() -> Self {
         Self {
-            size: 32.0,
+            size: 48.0,
             zoom: 8.0,
             // gravity: GravityMode::Constant(Vec2::new(0.0, -9.8)),
-            gravity: GravityMode::Point(Vec2::ZERO, 10.0),
+            gravity: GravityMode::Point(Vec2::ZERO, 20.0),
+            // gravity: GravityMode::None,
         }
     }
 }
