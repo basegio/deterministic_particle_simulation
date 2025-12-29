@@ -1,5 +1,6 @@
 use crate::particles::components::Particle;
-use crate::simulation::resources::SimulationSettings;
+use crate::simulation::resources::{GravityMode, SimulationSettings};
+use bevy::math::VectorSpace;
 use bevy::prelude::*;
 
 pub fn spawn_particles(mut commands: Commands, settings: Res<SimulationSettings>) {
@@ -27,9 +28,19 @@ pub fn apply_physics(
 ) {
     let dt = time.delta_secs();
     for (mut transform, mut particle) in &mut query {
+        let acceleration = match settings.gravity {
+            GravityMode::Constant(g) => g,
+            GravityMode::Point(center, strenght) => {
+                let dir = center - particle.position;
+                let dist_sq = dir.length_squared().max(0.1);
+                (dir.normalize_or_zero() * strenght) / dist_sq
+            }
+            GravityMode::None => Vec2::ZERO,
+        };
+
         let velocity = particle.position - particle.position_old;
         particle.position_old = particle.position;
-        particle.position = particle.position + velocity + settings.gravity * (dt * dt);
+        particle.position = particle.position + velocity + acceleration * (dt * dt);
         transform.translation = particle.position.extend(0.0);
     }
 }

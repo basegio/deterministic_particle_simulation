@@ -1,5 +1,10 @@
 # Changelog
 
+### dev
+#### Adicionado
+- Suporte a gravidade para ponto fixo
+- Suporte a desativar gravidade
+
 ### 0.2.0 - 28/12/2025
 > Creio que o uso de Verlet simplificado para calculo deterministico vai servir bem.
 #### Adicionado
