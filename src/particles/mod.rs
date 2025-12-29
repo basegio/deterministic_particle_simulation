@@ -7,15 +7,15 @@ pub struct ParticlePlugin;
 
 impl Plugin for ParticlePlugin {
     fn build(&self, app: &mut App) {
-        app.add_systems(Startup, systems::spawn_particles)
+        app.add_systems(Startup, systems::spawn::spawn_particles)
             .add_systems(
                 FixedUpdate,
                 (
-                    systems::apply_physics,
-                    systems::solve_collisions,
-                    systems::solve_enviroment_constraints_limits,
+                    systems::movement::apply_physics,
+                    systems::physics::solve_collisions,
+                    systems::physics::solve_enviroment_constraints_limits,
                 ),
             )
-            .add_systems(Update, systems::draw_particles);
+            .add_systems(Update, systems::draw::draw_particles);
     }
 }
