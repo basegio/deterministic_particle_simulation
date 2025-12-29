@@ -4,6 +4,7 @@
 #### Adicionado
 - Suporte a gravidade para ponto fixo
 - Suporte a desativar gravidade
+- Medidor de fps ao nome da janela
 #### Alterado
 - Lógica do spawn de particulas
 
