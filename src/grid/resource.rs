@@ -1,5 +1,7 @@
 use bevy::{math::USizeVec2, prelude::*};
 
+use crate::simulation::resources::SimulationSettings;
+
 #[derive(Resource)]
 pub struct CollisionGrid {
     pub cell_size: f32,
@@ -7,16 +9,25 @@ pub struct CollisionGrid {
     pub cells: Vec<Vec<Entity>>,
 }
 
-impl CollisionGrid {
-    pub fn new(world_size: f32, cell_size: f32) -> Self {
-        let size = (world_size / cell_size).ceil() as usize;
+impl FromWorld for CollisionGrid {
+    fn from_world(world: &mut World) -> Self {
+        let settings = world
+            .get_resource::<SimulationSettings>()
+            .expect("SimulationSettigns must be inserted before CollisionGrid");
+
+        let particle_radius = 4.0;
+        let particle_diameter = particle_radius * 2.0;
+        let cell_size = particle_diameter;
+        let size = (settings.size / (cell_size)).ceil() as usize;
         Self {
             cell_size,
             size: size,
             cells: vec![Vec::new(); size * size],
         }
     }
+}
 
+impl CollisionGrid {
     pub fn clear(&mut self) {
         for cell in self.cells.iter_mut() {
             cell.clear();
