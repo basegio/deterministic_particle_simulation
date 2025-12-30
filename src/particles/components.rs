@@ -4,6 +4,7 @@ use bevy::prelude::*;
 pub struct Particle {
     pub position: Vec2,
     pub position_old: Vec2,
+    pub radius: f32,
 }
 
 impl Particle {
@@ -11,6 +12,7 @@ impl Particle {
         Particle {
             position: position,
             position_old: position,
+            radius: 4.0,
         }
     }
 }

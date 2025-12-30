@@ -14,7 +14,9 @@ impl Plugin for ParticlePlugin {
                     systems::movement::apply_physics,
                     systems::physics::solve_collisions,
                     systems::physics::solve_enviroment_constraints_limits,
-                ),
+                )
+                    .chain()
+                    .after(crate::grid::systems::update_grid),
             )
             .add_systems(Update, systems::draw::draw_particles);
     }
