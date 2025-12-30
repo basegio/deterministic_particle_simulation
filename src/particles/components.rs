@@ -8,11 +8,11 @@ pub struct Particle {
 }
 
 impl Particle {
-    pub fn from_position(position: Vec2) -> Self {
+    pub fn new(position: Vec2, radius: f32) -> Self {
         Particle {
             position: position,
             position_old: position,
-            radius: 4.0,
+            radius: radius,
         }
     }
 }

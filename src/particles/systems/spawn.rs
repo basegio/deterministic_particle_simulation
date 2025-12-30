@@ -14,7 +14,7 @@ pub fn spawn_particles(mut commands: Commands, settings: Res<SimulationSettings>
             let y: f32 = j as f32 * 8.0 - settings.size / 2.0;
             let position: Vec2 = Vec2 { x: x, y: y };
             commands.spawn((
-                Particle::from_position(position),
+                Particle::new(position, settings.max_particle_radius),
                 Transform::from_xyz(position.x, position.y, 0.0),
             ));
         }
