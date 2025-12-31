@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.4.2 - 31/12/2025
+> Melhorias de UI apenas
+
+#### Alterado
+- Janela agora é quadrado fixa em 720x720
+- Viewport se adapta ao tamanho da simulação, preenchendo todo espaço da janela
+
 ### 0.4.1 - 30/12/2025
 > Apenas algumas melhorias de código // Desaparecimento de números mágicos // Organização e boas práticas.
 
