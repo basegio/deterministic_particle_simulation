@@ -1,7 +1,7 @@
 # Changelog | Devlog
 
 ### 0.4.3 - 01/01/2025
-> 2 da manhã do ano novo, estamos aqui. Planejo fazer algumas atualizações de otimizações, então esse update adiciona os preparativos, no caso, métricas.
+> 2 da manhã do ano novo, estamos aqui. Planejo fazer algumas atualizações de otimizações em breve, então este update adiciona métricas para medição de velocidade de execução de algumas funções.
 
 #### Adicionado
 - Adicionado Métrica de tempo gasto rodando a função solve_collisions
