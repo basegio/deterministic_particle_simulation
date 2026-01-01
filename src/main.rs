@@ -1,12 +1,13 @@
 mod core;
+mod diagnostic;
 mod grid;
 mod particles;
 mod simulation;
 
-use bevy::diagnostic::FrameTimeDiagnosticsPlugin;
 use bevy::prelude::*;
 
 use core::CorePlugin;
+use diagnostic::DiagnosticPlugin;
 use grid::GridPlugin;
 use particles::ParticlePlugin;
 use simulation::SimulationPlugin;
@@ -20,7 +21,7 @@ fn main() {
             }),
             ..default()
         }))
-        .add_plugins(FrameTimeDiagnosticsPlugin::default())
+        .add_plugins(DiagnosticPlugin)
         .add_plugins(CorePlugin)
         .add_plugins(SimulationPlugin)
         .add_plugins(GridPlugin)

@@ -1,15 +1,16 @@
 use std::time::Instant;
 
+use bevy::diagnostic::{DiagnosticMeasurement, DiagnosticsStore};
 use bevy::prelude::*;
 
-use crate::core::diagnostic::resource::GridUpdateDiagnostic;
+use crate::diagnostic::DiagnosticPlugin;
 use crate::grid::resource::CollisionGrid;
 use crate::particles::components::Particle;
 
 pub fn update_grid(
     mut grid: ResMut<CollisionGrid>,
     query: Query<(Entity, &Particle)>,
-    mut diag: ResMut<GridUpdateDiagnostic>,
+    mut diag: ResMut<DiagnosticsStore>,
 ) {
     let start = Instant::now();
 
@@ -20,10 +21,11 @@ pub fn update_grid(
         }
     }
 
-    let duration = start.elapsed();
-    diag.times.push(duration);
-
-    if diag.times.len() == diag.max_samples {
-        diag.print_result();
+    let elapsed = start.elapsed();
+    if let Some(diag) = diag.get_mut(&DiagnosticPlugin::GRID_UPDATE_TIME) {
+        diag.add_measurement(DiagnosticMeasurement {
+            time: Instant::now(),
+            value: elapsed.as_secs_f64() * 1000.0,
+        });
     }
 }

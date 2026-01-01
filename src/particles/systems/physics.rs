@@ -1,17 +1,18 @@
 use std::time::Instant;
 
-use crate::core::diagnostic::resource::CollisionDiagnostic;
+use crate::diagnostic::DiagnosticPlugin;
 use crate::grid::resource::CollisionGrid;
 use crate::particles::components::Particle;
 use crate::simulation::resources::SimulationSettings;
 
+use bevy::diagnostic::{DiagnosticMeasurement, DiagnosticsStore};
 use bevy::math::USizeVec2;
 use bevy::prelude::*;
 
 pub fn solve_collisions(
     grid: Res<CollisionGrid>,
     mut query: Query<&mut Particle>,
-    mut diag: ResMut<CollisionDiagnostic>,
+    mut diag: ResMut<DiagnosticsStore>,
 ) {
     let start = Instant::now();
 
@@ -49,11 +50,12 @@ pub fn solve_collisions(
         }
     }
 
-    let duration = start.elapsed();
-    diag.times.push(duration);
-
-    if diag.times.len() == diag.max_samples {
-        diag.print_result();
+    let elapsed = start.elapsed();
+    if let Some(diag) = diag.get_mut(&DiagnosticPlugin::SOLVE_COLLISIONS_TIME) {
+        diag.add_measurement(DiagnosticMeasurement {
+            time: Instant::now(),
+            value: elapsed.as_secs_f64() * 1000.0,
+        });
     }
 }
 
