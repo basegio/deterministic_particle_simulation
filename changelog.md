@@ -1,5 +1,12 @@
-# Changelog
+# Changelog | Devlog
 
+### 0.4.3 - 01/01/2025
+> 2 da manhã do ano novo, estamos aqui. Planejo fazer algumas atualizações de otimizações, então esse update adiciona os preparativos, no caso, métricas.
+
+#### Adicionado
+- Adicionado Métrica de tempo gasto rodando a função solve_collisions
+
+---
 ### 0.4.2 - 31/12/2025
 > Melhorias de UI apenas
 
@@ -7,6 +14,7 @@
 - Janela agora é quadrado fixa em 720x720
 - Viewport se adapta ao tamanho da simulação, preenchendo todo espaço da janela
 
+---
 ### 0.4.1 - 30/12/2025
 > Apenas algumas melhorias de código // Desaparecimento de números mágicos // Organização e boas práticas.
 
@@ -20,7 +28,7 @@
 - Alterado nome do construtor da Particle, from_position -> new
 - Particles Draw busca radius definido na Partícula
 
-
+---
 ### 0.4.0 - 29/12/2025
 > Cá estou eu as três da manhã do dia 29/12/2025 estudando uma estrutura de grid que seja interessante para resolver meu problema de colisões entre particulas inimiga do desempenho, estou com certa confiança em implementar uniform grid, acredito que seja uma implementação menos eficiente que uma kd-tree, mas sem dúvidas é mais fácil de implementar um multithread em um grid com tamanho constante do que recalcular uma arvore de divisões a cada fixedUpdate. De qualquer forma tudo está sujeito a mudanças no futuro, vamos ver como se sai essas abordagens.
 
@@ -41,7 +49,7 @@
 - Cálculo de colisão passou a ser baseado em grid
 - Cálculo de colisão usa raio da partícula
 
-
+---
 ### 0.3.0 - 28/12/2025
 > Aumentar o tamanho da simulação e elevar o numero de particulas para ~1000 levou o fps para ~1.
 Isso se dá pela lógica de colisão, levando cada particula buscar com possiveis colisões com todas as outras particulas, O(n²) como dito anteriormente.
@@ -53,7 +61,7 @@ Isso se dá pela lógica de colisão, levando cada particula buscar com possivei
 #### Alterado
 - Lógica do spawn de particulas
 
-
+---
 ### 0.2.0 - 28/12/2025
 > Creio que o uso de Verlet simplificado para calculo deterministico vai servir bem.
 
@@ -69,6 +77,6 @@ Isso se dá pela lógica de colisão, levando cada particula buscar com possivei
 - Lógica do spawn de particulas
 - apply_physics agora usa calculo dinâmico de velocity baseado em position e position_old
 
-
+---
 ### 0.1.0 - 28/12/2025
 #### Versão inicial
