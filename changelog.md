@@ -5,6 +5,7 @@
 
 #### Adicionado
 - Adicionado Métrica de tempo gasto rodando a função solve_collisions
+- Adicionado Métrica de tempo gasto rodando a função grid_update
 
 ---
 ### 0.4.2 - 31/12/2025
