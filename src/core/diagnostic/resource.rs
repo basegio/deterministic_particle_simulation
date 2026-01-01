@@ -28,16 +28,19 @@ impl CollisionDiagnostic {
         }
 
         let total: Duration = self.times.iter().sum();
-        let avg = total.as_micros() / self.times.len() as u128;
-        let min = self.times.iter().min().unwrap().as_micros();
-        let max = self.times.iter().max().unwrap().as_micros();
+        let avg_ns = total.as_nanos() / self.times.len() as u128;
+        let min_ns = self.times.iter().min().unwrap().as_nanos();
+        let max_ns = self.times.iter().max().unwrap().as_nanos();
+        let avg_mc = Duration::from_nanos(avg_ns as u64).as_micros();
+        let min_mc = Duration::from_nanos(min_ns as u64).as_micros();
+        let max_mc = Duration::from_nanos(max_ns as u64).as_micros();
 
         println!("---");
         println!("Times to run a complete call of solve_collisions fn");
         println!("Total diag duration {} seconds", total.as_secs_f64());
-        println!("Average {} µs", avg);
-        println!("Minimum {} µs", min);
-        println!("Maximum {} µs", max);
+        println!("Average {} µs | {} ns", avg_mc, avg_ns);
+        println!("Minimum {} µs | {} ns", min_mc, min_ns);
+        println!("Maximum {} µs | {} ns", max_mc, max_ns);
     }
 }
 
@@ -55,15 +58,18 @@ impl GridUpdateDiagnostic {
         }
 
         let total: Duration = self.times.iter().sum();
-        let avg = total.as_micros() / self.times.len() as u128;
-        let min = self.times.iter().min().unwrap().as_micros();
-        let max = self.times.iter().max().unwrap().as_micros();
+        let avg_ns = total.as_nanos() / self.times.len() as u128;
+        let min_ns = self.times.iter().min().unwrap().as_nanos();
+        let max_ns = self.times.iter().max().unwrap().as_nanos();
+        let avg_mc = Duration::from_nanos(avg_ns as u64).as_micros();
+        let min_mc = Duration::from_nanos(min_ns as u64).as_micros();
+        let max_mc = Duration::from_nanos(max_ns as u64).as_micros();
 
         println!("---");
         println!("Times to run a complete call of update_grid fn");
         println!("Total diag duration {} seconds", total.as_secs_f64());
-        println!("Average {} µs", avg);
-        println!("Minimum {} µs", min);
-        println!("Maximum {} µs", max);
+        println!("Average {} µs | {} ns", avg_mc, avg_ns);
+        println!("Minimum {} µs | {} ns", min_mc, min_ns);
+        println!("Maximum {} µs | {} ns", max_mc, max_ns);
     }
 }
