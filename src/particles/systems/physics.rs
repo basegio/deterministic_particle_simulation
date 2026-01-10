@@ -81,7 +81,7 @@ pub fn resolve_entities_collisions(
                     let dist = dist_sq.sqrt();
                     let n = collision_axis / dist;
                     let delta = min_dist - dist;
-                    let compensation = n * delta * 0.5;
+                    let compensation = n * delta * settings.relaxation_factor;
 
                     p_a.position += compensation;
                     p_b.position -= compensation;

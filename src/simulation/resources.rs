@@ -6,6 +6,7 @@ pub struct SimulationSettings {
     pub max_particle_radius: f32,
     pub gravity: GravityMode,
     pub collision_friction: f32,
+    pub relaxation_factor: f32,
 }
 
 impl Default for SimulationSettings {
@@ -17,6 +18,7 @@ impl Default for SimulationSettings {
             gravity: GravityMode::Point(Vec2::ZERO, 24000.0),
             // gravity: GravityMode::None,
             collision_friction: 0.1,
+            relaxation_factor: 0.5,
         }
     }
 }
