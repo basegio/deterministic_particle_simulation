@@ -10,8 +10,8 @@ pub struct SimulationSettings {
 impl Default for SimulationSettings {
     fn default() -> Self {
         Self {
-            size: 512.0,
-            max_particle_radius: 4.0,
+            size: 1024.0,
+            max_particle_radius: 2.0,
             // gravity: GravityMode::Constant(Vec2::new(0.0, -9.8)),
             gravity: GravityMode::Point(Vec2::ZERO, 24000.0),
             // gravity: GravityMode::None,
