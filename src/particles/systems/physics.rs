@@ -86,8 +86,8 @@ pub fn resolve_entities_collisions(
                     p_a.position += compensation;
                     p_b.position -= compensation;
 
-                    p_a.position_old += compensation * settings.collision_friction;
-                    p_b.position_old -= compensation * settings.collision_friction;
+                    p_a.position_old += compensation * settings.restitution_amortization;
+                    p_b.position_old -= compensation * settings.restitution_amortization;
                 }
             }
         }
