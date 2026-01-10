@@ -1,3 +1,5 @@
+use std::time::Duration;
+
 use bevy::diagnostic::{
     Diagnostic, DiagnosticPath, FrameTimeDiagnosticsPlugin, LogDiagnosticsPlugin,
     RegisterDiagnostic,
@@ -16,7 +18,11 @@ impl DiagnosticPlugin {
 impl Plugin for DiagnosticPlugin {
     fn build(&self, app: &mut App) {
         app.add_plugins(FrameTimeDiagnosticsPlugin::default())
-            .add_plugins(LogDiagnosticsPlugin::default())
+            .add_plugins(LogDiagnosticsPlugin {
+                debug: false,
+                wait_duration: Duration::from_millis(256),
+                filter: None,
+            })
             .register_diagnostic(
                 Diagnostic::new(Self::SOLVE_COLLISIONS_TIME)
                     .with_suffix("µs")
