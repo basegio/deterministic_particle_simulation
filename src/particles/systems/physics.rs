@@ -11,8 +11,9 @@ use bevy::prelude::*;
 
 pub fn solve_collisions(
     grid: Res<CollisionGrid>,
-    mut query: Query<&mut Particle>,
+    settings: Res<SimulationSettings>,
     mut diag: ResMut<DiagnosticsStore>,
+    mut query: Query<&mut Particle>,
 ) {
     let start = Instant::now();
 
@@ -43,6 +44,7 @@ pub fn solve_collisions(
                             entities_b,
                             &mut query,
                             current_idx == neighbor_idx,
+                            &settings,
                         );
                     }
                 }
@@ -64,6 +66,7 @@ pub fn resolve_entities_collisions(
     entities_b: &[Entity],
     query: &mut Query<&mut Particle>,
     same_cell: bool,
+    settings: &SimulationSettings,
 ) {
     for (i, &ent_a) in entities_a.iter().enumerate() {
         let start_index = if same_cell { i + 1 } else { 0 };
@@ -79,8 +82,12 @@ pub fn resolve_entities_collisions(
                     let n = collision_axis / dist;
                     let delta = min_dist - dist;
                     let compensation = n * delta * 0.5;
+
                     p_a.position += compensation;
                     p_b.position -= compensation;
+
+                    p_a.position_old += compensation * settings.collision_friction;
+                    p_b.position_old -= compensation * settings.collision_friction;
                 }
             }
         }
