@@ -15,8 +15,8 @@ pub fn apply_physics_logic(
             GravityMode::Constant(g) => g,
             GravityMode::Point(center, strenght) => {
                 let dir = center - particle.position;
-                let dist_sq = dir.length_squared().max(8.0);
-                (dir.normalize_or_zero() * strenght) / dist_sq
+                let dist_sq = dir.length_squared();
+                dir.normalize_or_zero() * strenght / (dist_sq + settings.softening)
             }
             GravityMode::None => Vec2::ZERO,
         };

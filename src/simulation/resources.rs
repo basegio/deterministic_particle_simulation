@@ -9,6 +9,7 @@ pub struct SimulationSettings {
     pub damping: f32,
     pub restitution_amortization: f32,
     pub relaxation_factor: f32,
+    pub softening: f32,
 }
 
 impl Default for SimulationSettings {
@@ -17,12 +18,13 @@ impl Default for SimulationSettings {
             size: 1024,
             max_particle_radius: 2.0,
             // gravity: GravityMode::Constant(Vec2::new(0.0, -9.8)),
-            gravity: GravityMode::Point(Vec2::ZERO, 1000.0),
+            gravity: GravityMode::Point(Vec2::ZERO, 72000.0),
             // gravity: GravityMode::None,
             substeps: 8,
-            damping: 0.98,
-            restitution_amortization: 0.1,
-            relaxation_factor: 0.5,
+            damping: 0.99,
+            restitution_amortization: 0.05,
+            relaxation_factor: 0.2,
+            softening: 40000.0,
         }
     }
 }
