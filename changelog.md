@@ -1,5 +1,26 @@
 # Changelog | Devlog
 
+### 0.7.0 - xx/01/2025 - [Planejamento]
+> Permitir geração de particulas com diferentes raios em simultâneo
+
+---
+
+### 0.6.0 - xx/01/2025 - [Planejamento]
+> Otimizar para que ECS faça query apenas uma vez por Fixed Update, reduzindo o stuttering por excesso de consultas (válidar possibilidade)
+
+---
+### 0.5.1 - xx/01/2025
+#### Adicionado
+- Adicionado configuração de softening para suavizar o ponto de singularidade
+
+#### Alterado
+- Área de spawn levemente reduzida para evitar problema com colisão prematura com a borda
+- Mudanças gerais na configuração da simulação para tornar mais estável
+
+#### Removido
+- Removido .max de lenght_squared ao ser puxado pela gravidade. (A adição de softening já previne divisão por zero e tem resultado melhor na suavização).
+
+---
 ### 0.5.0 - 10/01/2025
 > A maior das minhas questões com os substeps, "Faz sentido implementar substeps ou seria melhor apenas subir os hz do fixed update?", após muita pesquisa, entendi que no caso dessa simulação, a variar do futuro que pretendo chegar com ela, a solução de apenas aumentar os hz teria overhead no ECS tendo que fazer mais querys que o necessário, então uma solução seria sair dele, mas eu planejo seguir a abordagem gerenciada pelo bevy. A diferença não será tanta por agora, mas planejo subir uma otimização ainda na v0.5.x reduzindo o overhead criado por ambos os métodos, mas supostamente mais fácil para tratar com ECS e substeps. Será uma otimização legal que planejo medir e documentar, mas fica pra mim descobrir no futuro próximo.
 
