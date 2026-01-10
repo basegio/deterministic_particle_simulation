@@ -19,8 +19,8 @@ fn setup_camera(mut commands: Commands, settings: Res<SimulationSettings>) {
         Camera2d,
         Projection::from(OrthographicProjection {
             scaling_mode: bevy::camera::ScalingMode::Fixed {
-                width: settings.size,
-                height: settings.size,
+                width: settings.size as f32,
+                height: settings.size as f32,
             },
             ..OrthographicProjection::default_2d()
         }),

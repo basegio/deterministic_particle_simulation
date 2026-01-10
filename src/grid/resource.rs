@@ -17,7 +17,7 @@ impl FromWorld for CollisionGrid {
 
         let max_particle_diameter = settings.max_particle_radius * 2.0;
         let cell_size = max_particle_diameter;
-        let size = (settings.size / (cell_size)).ceil() as usize;
+        let size = (settings.size as f32 / cell_size).ceil() as usize;
         Self {
             cell_size,
             size: size,

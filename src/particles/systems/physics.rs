@@ -91,7 +91,7 @@ pub fn solve_enviroment_constraints_limits(
     settings: Res<SimulationSettings>,
     mut query: Query<(&mut Transform, &mut Particle)>,
 ) {
-    let border_distance = settings.size / 2.0;
+    let border_distance = settings.size as f32 / 2.0;
 
     for (mut transform, mut particle) in &mut query {
         if particle.position.y < -border_distance + particle.radius {
