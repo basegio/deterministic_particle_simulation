@@ -9,7 +9,6 @@ pub struct GridPlugin;
 
 impl Plugin for GridPlugin {
     fn build(&self, app: &mut App) {
-        app.init_resource::<CollisionGrid>()
-            .add_systems(FixedUpdate, systems::update_grid);
+        app.init_resource::<CollisionGrid>();
     }
 }

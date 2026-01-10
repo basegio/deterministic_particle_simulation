@@ -5,13 +5,12 @@ use crate::{
     simulation::resources::{GravityMode, SimulationSettings},
 };
 
-pub fn apply_physics(
-    time: Res<Time<Fixed>>,
-    settings: Res<SimulationSettings>,
-    mut query: Query<(&mut Transform, &mut Particle)>,
+pub fn apply_physics_logic(
+    dt: &f32,
+    settings: &SimulationSettings,
+    query: &mut Query<(&mut Transform, &mut Particle)>,
 ) {
-    let dt = time.delta_secs();
-    for (mut transform, mut particle) in &mut query {
+    for (_, mut particle) in query {
         let acceleration = match settings.gravity {
             GravityMode::Constant(g) => g,
             GravityMode::Point(center, strenght) => {
@@ -24,7 +23,6 @@ pub fn apply_physics(
 
         let velocity = (particle.position - particle.position_old) * settings.damping;
         particle.position_old = particle.position;
-        particle.position += velocity + acceleration * (dt * dt);
-        transform.translation = particle.position.extend(0.0);
+        particle.position += velocity + acceleration * dt;
     }
 }

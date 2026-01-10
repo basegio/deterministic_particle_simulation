@@ -22,6 +22,7 @@ pub fn spawn_particles(mut commands: Commands, settings: Res<SimulationSettings>
             {
                 continue;
             };
+
             commands.spawn((
                 Particle::new(position, settings.max_particle_radius),
                 Transform::from_xyz(position.x, position.y, 0.0),

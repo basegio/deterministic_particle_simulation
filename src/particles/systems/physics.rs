@@ -9,11 +9,11 @@ use bevy::diagnostic::{DiagnosticMeasurement, DiagnosticsStore};
 use bevy::math::USizeVec2;
 use bevy::prelude::*;
 
-pub fn solve_collisions(
-    grid: Res<CollisionGrid>,
-    settings: Res<SimulationSettings>,
-    mut diag: ResMut<DiagnosticsStore>,
-    mut query: Query<&mut Particle>,
+pub fn solve_collisions_logic(
+    grid: &CollisionGrid,
+    diag: &mut DiagnosticsStore,
+    settings: &SimulationSettings,
+    query: &mut Query<(&mut Transform, &mut Particle)>,
 ) {
     let start = Instant::now();
 
@@ -42,9 +42,9 @@ pub fn solve_collisions(
                         resolve_entities_collisions(
                             entities_a,
                             entities_b,
-                            &mut query,
+                            query,
                             current_idx == neighbor_idx,
-                            &settings,
+                            settings,
                         );
                     }
                 }
@@ -64,7 +64,7 @@ pub fn solve_collisions(
 pub fn resolve_entities_collisions(
     entities_a: &[Entity],
     entities_b: &[Entity],
-    query: &mut Query<&mut Particle>,
+    query: &mut Query<(&mut Transform, &mut Particle)>,
     same_cell: bool,
     settings: &SimulationSettings,
 ) {
@@ -72,7 +72,7 @@ pub fn resolve_entities_collisions(
         let start_index = if same_cell { i + 1 } else { 0 };
 
         for &ent_b in &entities_b[start_index..] {
-            if let Ok([mut p_a, mut p_b]) = query.get_many_mut([ent_a, ent_b]) {
+            if let Ok([(_, mut p_a), (_, mut p_b)]) = query.get_many_mut([ent_a, ent_b]) {
                 let collision_axis = p_a.position - p_b.position;
                 let dist_sq = collision_axis.length_squared();
                 let min_dist = p_a.radius + p_b.radius;
@@ -94,13 +94,13 @@ pub fn resolve_entities_collisions(
     }
 }
 
-pub fn solve_enviroment_constraints_limits(
-    settings: Res<SimulationSettings>,
-    mut query: Query<(&mut Transform, &mut Particle)>,
+pub fn solve_limits_logic(
+    settings: &SimulationSettings,
+    query: &mut Query<(&mut Transform, &mut Particle)>,
 ) {
     let border_distance = settings.size as f32 / 2.0;
 
-    for (mut transform, mut particle) in &mut query {
+    for (_, mut particle) in query {
         if particle.position.y < -border_distance + particle.radius {
             particle.position.y = -border_distance + particle.radius
         } else if particle.position.y > border_distance - particle.radius {
@@ -112,7 +112,5 @@ pub fn solve_enviroment_constraints_limits(
         } else if particle.position.x > border_distance - particle.radius {
             particle.position.x = border_distance - particle.radius
         }
-
-        transform.translation = particle.position.extend(0.0);
     }
 }

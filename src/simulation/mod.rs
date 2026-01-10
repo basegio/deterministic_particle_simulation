@@ -10,6 +10,14 @@ impl Plugin for SimulationPlugin {
     fn build(&self, app: &mut App) {
         app.init_resource::<SimulationSettings>()
             .add_systems(Startup, setup_camera)
+            .add_systems(
+                FixedUpdate,
+                (
+                    crate::grid::systems::update_grid,
+                    systems::step_physics_simulation,
+                )
+                    .chain(),
+            )
             .add_systems(Update, systems::draw_constraints);
     }
 }
