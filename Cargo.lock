@@ -2045,6 +2045,7 @@ name = "deterministic_particle_simulation"
 version = "0.2.0"
 dependencies = [
  "bevy",
+ "rand",
 ]
 
 [[package]]
