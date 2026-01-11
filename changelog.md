@@ -1,5 +1,10 @@
 # Changelog | Devlog
 
+### 0.8.0 - xx/01/2025 - [Planejamento]
+> Testar e validar substituição de coordenadas no solve collisions por flatmap de index
+> Testar uso de bitwise no flatmap de index como alternativa para uso de módulo na checkagem de borda com index (computacionalmente custoso)
+
+---
 ### 0.7.0 - xx/01/2025 - [Planejamento]
 > Permitir geração de particulas com diferentes raios em simultâneo de forma procedural usando uma seed única
 
