@@ -1,12 +1,18 @@
 # Changelog | Devlog
 
 ### 0.7.0 - xx/01/2025 - [Planejamento]
-> Permitir geração de particulas com diferentes raios em simultâneo
+> Permitir geração de particulas com diferentes raios em simultâneo de forma procedural usando uma seed única
 
 ---
 
-### 0.6.0 - xx/01/2025 - [Planejamento]
-> Otimizar para que ECS faça query apenas uma vez por Fixed Update, reduzindo o stuttering por excesso de consultas (válidar possibilidade)
+### 0.6.0 - 11/01/2025
+> Com o uso de substeps, a simulação passou a testar colisão 8x ao longo de um fixed update, aumentando consideravelmente o peso das consultas com querys pelo bevy. Como atualmente tenho total controle de quantas entidades existem na simulação, alterei a forma como as queries funcionam, invés de consultá-las a cada iteração de substep dentro das chamadas de física, faço uma única consulta por fixed update, atribuo o resultado de Particle a um vec buffer, e uso ao longo dos substeps. Ao final, dos substeps, devolvo ao controle do ECS as partículas atualizadas contidas no buffer. Somado a isso, a estrutura do Grid foi simplificado, os dados dentro das células deixaram de indicar a referência das entidades que ali estão e passaram a atribuir apenas o index da consulta por Particle na simulação.
+
+> Notasse no comparativo da otimização uma queda considerável no custo de tempo para iterar sobre a lógica de colisões (solve_collisions). Por outro lado houve um aumento no custo para atualizar as células do grid que divide os grupos de particulas (grid_update). Fato importante a considerar, atualmente o grid_update roda 64 vezes por segundo conforme a configuração de hz do fixed update, já o solve_collisions atualiza 8 vezes por iteração do fixed update, totalizando 512 vezes por segundo. No fim valeu muito a pena. Ao fim da simulação, o agregado por ciclo com total dos métodos foi de ~13kµs para ~8.4kµs, uma redução de ~35% do tempo gasto.
+<img src="docs/query_usage_reduction_using_staged_particles.png" alt="Query usage reduction using Staged Particles" height="400"/>
+
+#### Alterado
+- Migrado sistema de queries ECS das lógicas para buffer de Particle
 
 ---
 ### 0.5.3 - 10/01/2025
