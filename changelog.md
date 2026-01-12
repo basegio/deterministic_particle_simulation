@@ -6,10 +6,13 @@
 
 ---
 ### 0.7.0 - xx/01/2025 - [Planejamento]
-> Permitir geração de particulas com diferentes raios em simultâneo de forma procedural usando uma seed única
+#### Adicionado
+- Adicionado raio de particulas procedural a partir de seed (default 0)
+
+#### Alterado
+- Refatoração do código de spawn para evitar realocação de memoria desnecessária
 
 ---
-
 ### 0.6.0 - 11/01/2025
 > Com o uso de substeps, a simulação passou a testar colisão 8x ao longo de um fixed update, aumentando consideravelmente o peso das consultas com querys pelo bevy. Como atualmente tenho total controle de quantas entidades existem na simulação, alterei a forma como as queries funcionam, invés de consultá-las a cada iteração de substep dentro das chamadas de física, faço uma única consulta por fixed update, atribuo o resultado de Particle a um vec buffer, e uso ao longo dos substeps. Ao final, dos substeps, devolvo ao controle do ECS as partículas atualizadas contidas no buffer. Somado a isso, a estrutura do Grid foi simplificado, os dados dentro das células deixaram de indicar a referência das entidades que ali estão e passaram a atribuir apenas o index da consulta por Particle na simulação.
 
