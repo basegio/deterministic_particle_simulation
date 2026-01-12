@@ -31,7 +31,6 @@ impl Default for SimulationSettings {
     }
 }
 
-#[derive(Resource)]
 pub enum GravityMode {
     Constant(Vec2),
     Point(Vec2, f32),
