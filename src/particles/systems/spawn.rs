@@ -9,7 +9,6 @@ pub fn spawn_particles(mut commands: Commands, settings: Res<SimulationSettings>
     let mut rng = SmallRng::seed_from_u64(0);
     let simulation_size = settings.size as f32;
     let max_particle_diameter = settings.max_particle_radius * 2.0;
-    let half_particle_radius = settings.max_particle_radius / 2.0;
     let half_simulation_size = simulation_size / 2.0;
 
     for i in 1..settings.size {
@@ -28,7 +27,9 @@ pub fn spawn_particles(mut commands: Commands, settings: Res<SimulationSettings>
                 continue;
             };
 
-            let radius = half_particle_radius + (half_particle_radius * rng.random::<f32>());
+            let radius = ((settings.max_particle_radius - settings.min_particle_radius)
+                * rng.random::<f32>())
+                + settings.min_particle_radius;
             commands.spawn((
                 Particle::new(position, radius),
                 Transform::from_xyz(position.x, position.y, 0.0),
