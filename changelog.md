@@ -4,6 +4,17 @@
 > Adicionar cores as particulas baseado em [*Aceleração*,*Proximidade ao centro de força*, *Direção*, *Tempo de Vida*].
 > Testar e validar substituição de coordenadas no solve collisions por flatmap de index.
 > Testar uso de bitwise no flatmap de index como alternativa para uso de módulo na checkagem de borda com index (computacionalmente custoso).
+> Adicionar paint boundary com base nas configurações da Boundary.
+> Adicionar interação com o mouse.
+
+---
+### 0.8.1 - 12/01/2025
+#### Adicionado
+- Boundary mode None
+
+#### Alterado
+- Padrão de Spawn
+- Configurações da simulação
 
 ---
 ### 0.8.0 - 12/01/2025
@@ -15,7 +26,7 @@
 
 #### Alterado
 - Refatorado estruturação de código de boundary
-- Configuração da simulação
+- Configurações da simulação
 
 ---
 ### 0.7.0 - 12/01/2025
