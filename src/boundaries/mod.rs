@@ -2,6 +2,7 @@ use crate::particles::components::Particle;
 use crate::simulation::resources::SimulationSettings;
 
 pub enum BoundaryMode {
+    None,
     Square,
     Circle { radius: f32 },
 }
@@ -9,6 +10,7 @@ pub enum BoundaryMode {
 impl BoundaryMode {
     pub fn resolve(&self, settings: &SimulationSettings, particles: &mut Vec<Particle>) {
         match self {
+            BoundaryMode::None => {}
             BoundaryMode::Square => solve_square_boundary(settings, particles),
             BoundaryMode::Circle { radius } => solve_circle_boundary(settings, particles, *radius),
         }

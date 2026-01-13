@@ -24,11 +24,8 @@ impl Default for SimulationSettings {
             size: size,
             min_particle_radius: 2.0,
             max_particle_radius: 8.0,
-            // gravity: GravityMode::Point(Vec2::ZERO, 72000.0),
-            gravity: GravityMode::Constant(Vec2::new(0.0, -9.8)),
-            boundary_mode: BoundaryMode::Circle {
-                radius: size as f32 / 4.0,
-            },
+            gravity: GravityMode::Point(Vec2::ZERO, 72000.0),
+            boundary_mode: BoundaryMode::None,
             substeps: 8,
             damping: 0.99,
             restitution_amortization: 0.05,
