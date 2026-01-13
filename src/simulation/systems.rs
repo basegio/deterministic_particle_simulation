@@ -32,7 +32,7 @@ pub fn step_physics_simulation(
         particles::systems::physics::solve_collisions_logic(&grid, &settings, &mut particles);
         finish_solve_collision_diag(start, &mut diag);
 
-        particles::systems::physics::solve_limits_logic(&settings, &mut particles);
+        settings.boundary_mode.resolve(&settings, &mut particles);
     }
 
     for (i, (mut transform, mut particle)) in query.iter_mut().enumerate() {

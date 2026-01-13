@@ -1,3 +1,4 @@
+mod boundaries;
 mod core;
 mod diagnostic;
 mod grid;

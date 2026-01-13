@@ -81,21 +81,3 @@ pub fn resolve_indexes_collisions(
         }
     }
 }
-
-pub fn solve_limits_logic(settings: &SimulationSettings, particles: &mut Vec<Particle>) {
-    let border_distance = settings.size as f32 / 2.0;
-
-    for particle in particles {
-        if particle.position.y < -border_distance + particle.radius {
-            particle.position.y = -border_distance + particle.radius
-        } else if particle.position.y > border_distance - particle.radius {
-            particle.position.y = border_distance - particle.radius
-        }
-
-        if particle.position.x < -border_distance + particle.radius {
-            particle.position.x = -border_distance + particle.radius
-        } else if particle.position.x > border_distance - particle.radius {
-            particle.position.x = border_distance - particle.radius
-        }
-    }
-}

@@ -1,16 +1,21 @@
 # Changelog | Devlog
 
-### 0.10.0 - xx/01/2025 - [Planejamento]
-> Adicionar cores as particulas baseado em [*Aceleração*,*Proximidade ao centro de força*, *Direção*, *Tempo de Vida*]
+### Ideias Futuras
+> Adicionar cores as particulas baseado em [*Aceleração*,*Proximidade ao centro de força*, *Direção*, *Tempo de Vida*].
+> Testar e validar substituição de coordenadas no solve collisions por flatmap de index.
+> Testar uso de bitwise no flatmap de index como alternativa para uso de módulo na checkagem de borda com index (computacionalmente custoso).
 
 ---
-### 0.9.0 - xx/01/2025 - [Planejamento]
-> Testar e validar substituição de coordenadas no solve collisions por flatmap de index
-> Testar uso de bitwise no flatmap de index como alternativa para uso de módulo na checkagem de borda com index (computacionalmente custoso)
+### 0.8.0 - 12/01/2025
+> Eu não esperava, mas ficou muito mais divertido uma boundary circular com gravidade para baixo. Ficou bem mais notável a estabilidade que eu estava buscando, as colisões estão incrivelmente bem. Estou com grandes expectativas nas versões futuras.
 
----
-### 0.8.0 - xx/01/2025 - [Planejamento]
-> Adicionar mais formatos de ambiente a simulação
+#### Adicionado
+- Enum BoundaryMode
+- Boundary circular
+
+#### Alterado
+- Refatorado estruturação de código de boundary
+- Configuração da simulação
 
 ---
 ### 0.7.0 - 12/01/2025
